@@ -14,11 +14,12 @@ function Interval(props) {
         <div className="Interval">
             <span>
                 <strong>Mínimo:</strong>
-                <input type="number"  value={min} readOnly/>
+                <input type="number"  value={min} 
+                onChange={e => props.EditNumberMin(+e.target.value)} />
             </span> 
             <span>
                 <strong>Máximo:</strong>
-                <input type="number"  value={max} readOnly/>
+                <input type="number"  value={max} readOnly />
             </span>
         </div>
         </Card>
@@ -34,13 +35,16 @@ function mapStateToProps(state){
     };
 }
 
-function mapActionCreatorToProps(dispatch){
+function mapDispatchToProps(dispatch){
     return {
-        editMin(newNumber){
+        EditNumberMin(newNumber){
             //Action Creator -> Action
             const action =  EditNumberMin(newNumber)
-            dispatch(action)
+            dispatch(action);
         }
     }
 }
-export default connect(mapStateToProps, mapActionCreatorToProps) (Interval)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+     ) (Interval)
